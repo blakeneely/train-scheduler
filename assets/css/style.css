@@ -1,0 +1,13 @@
+body {
+    background: black url(../../assets/images/station.jpg) no-repeat 50% 50% fixed;
+    background-size: cover;
+}
+
+.card {
+    background: rgb(0, 0, 0, 0.8);
+    border: black 1px solid;
+}
+
+.card-header {
+    background: black;
+}
