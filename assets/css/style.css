@@ -8,6 +8,6 @@ body {
     border: black 1px solid;
 }
 
-.card-header {
+.card-header, .jumbotron{
     background: black;
 }
