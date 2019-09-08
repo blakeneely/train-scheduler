@@ -49,6 +49,13 @@ database.ref().on("child_added", function(childsnapshot){
     var time = childsnapshot.val().time;
     var frequency = childsnapshot.val().frequency;
 
+    var currentTime = moment();                                                 // Save user's current time to variable
+    var diffTime = moment().diff(moment.unix(time), "minutes");                 // Different in minutes from first train time entered
+    var remainder = diffTime % frequency;                                       // Get remainder from time apart and frequency
+    var minutes = frequency - remainder;                                        // Get minutes from remainder
+    var nextTrain = moment().add(minutes, 'minutes');                           // Get minutes for next train
+    var nextTrainFormat = moment(nextTrain).format('LT');                         // Make format pretty
+
     console.log(name);
     console.log(destination);
     console.log(time);
@@ -58,8 +65,8 @@ database.ref().on("child_added", function(childsnapshot){
         $("<td>").text(name),
         $("<td>").text(destination),
         $("<td>").text(frequency),
-        $("<td>").text(" "),
-        $("<td>").text(" "),
+        $("<td>").text(nextTrainFormat),
+        $("<td>").text(minutes),
     );
 
     $("#train-table").append(newRow);
