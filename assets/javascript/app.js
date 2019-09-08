@@ -27,11 +27,6 @@ $("#submit-btn").on("click", function(){
         frequency, frequency,
     };
 
-    console.log(name);
-    console.log(destination);
-    console.log(time);
-    console.log(frequency);
-
     database.ref().push(newTrain);                                              // Push train object to firebase databawse
 
     $("#name-input").val("");                                                   // Clear input boxes
@@ -42,9 +37,8 @@ $("#submit-btn").on("click", function(){
 
 // Event listener to load objects in database to table
 database.ref().on("child_added", function(childsnapshot){
-    console.log(childsnapshot.val());
 
-    var name = childsnapshot.val().name;                                        
+    var name = childsnapshot.val().name;                                        // Store object values into variables
     var destination = childsnapshot.val().destination;
     var time = childsnapshot.val().time;
     var frequency = childsnapshot.val().frequency;
@@ -54,14 +48,9 @@ database.ref().on("child_added", function(childsnapshot){
     var remainder = diffTime % frequency;                                       // Get remainder from time apart and frequency
     var minutes = frequency - remainder;                                        // Get minutes from remainder
     var nextTrain = moment().add(minutes, 'minutes');                           // Get minutes for next train
-    var nextTrainFormat = moment(nextTrain).format('LT');                         // Make format pretty
+    var nextTrainFormat = moment(nextTrain).format('LT');                       // Make format pretty
 
-    console.log(name);
-    console.log(destination);
-    console.log(time);
-    console.log(frequency);
-
-    var newRow = $("<tr>").append(
+    var newRow = $("<tr>").append(                                              // jQuery add values to html table
         $("<td>").text(name),
         $("<td>").text(destination),
         $("<td>").text(frequency),
