@@ -37,7 +37,7 @@ $("#submit-btn").on("click", function(){
     $("#name-input").val("");                                                   // Clear input boxes
     $("#destination-input").val("");
     $("#time-input").val("");
-    $("#frequency-input").val();
+    $("#frequency-input").val("");
 });
 
 // Event listener to load objects in database to table
