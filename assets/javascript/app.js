@@ -12,15 +12,15 @@ appId: "1:466444663514:web:50c576aaf29f5e89"
 firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
-
+// Event listener for submit button
 $("#submit-btn").on("click", function(){
-    event.preventDefault();
-    var name = $("#name-input").val().trim();
+    event.preventDefault();                                                     // Stop default action of submit
+    var name = $("#name-input").val().trim();                                   // Stores value of inputs into variables
     var destination = $("#destination-input").val().trim();
     var time = moment($("#time-input").val().trim(), "HH:mm").format("X");
     var frequency = $("#frequency-input").val().trim();
 
-    var newTrain = {
+    var newTrain = {                                                            // Store input variables as object
         name: name,
         destination: destination,
         time: time,
@@ -32,13 +32,19 @@ $("#submit-btn").on("click", function(){
     console.log(time);
     console.log(frequency);
 
-    database.ref().push(newTrain);
+    database.ref().push(newTrain);                                              // Push train object to firebase databawse
+
+    $("#name-input").val("");                                                   // Clear input boxes
+    $("#destination-input").val("");
+    $("#time-input").val("");
+    $("#frequency-input").val();
 });
 
+// Event listener to load objects in database to table
 database.ref().on("child_added", function(childsnapshot){
     console.log(childsnapshot.val());
 
-    var name = childsnapshot.val().name;
+    var name = childsnapshot.val().name;                                        
     var destination = childsnapshot.val().destination;
     var time = childsnapshot.val().time;
     var frequency = childsnapshot.val().frequency;
